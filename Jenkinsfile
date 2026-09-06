@@ -36,7 +36,7 @@ podTemplate(
                 withEnv(['DOCKER_HOST=tcp://localhost:2375']) {
                     echo "Building docker image..."
                     sh "echo docker push ${appimage}"
-                    sh "docker build -t ${appimage}:${apptag} ."
+                    sh "docker build -t ${appimage}:${apptag} -t ${appimage}:latest ."
                 }
             }
         } // end build
@@ -53,6 +53,7 @@ podTemplate(
                     }
                 }
             }
-        } // end push
-    } // end node
-} // end podTemplate
+        } 
+    } 
+} // 
+
