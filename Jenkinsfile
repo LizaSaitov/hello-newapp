@@ -17,7 +17,7 @@ podTemplate(
             ttyEnabled: true,
             privileged: true,
             args: '--storage-driver=vfs --host=tcp://0.0.0.0:2375'
-        )
+        ),
 	containerTemplate(
             name: 'helm',
             image: 'alpine/helm:latest',
