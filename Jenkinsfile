@@ -4,19 +4,24 @@ def appimage = "${repo}/${appname}"
 def apptag = "${env.BUILD_NUMBER}"
 
 podTemplate(containers: [
-      containerTemplate(name: 'jnlp', image: 'jenkins/inbound-agent', ttyEnabled: true),
+      containerTemplate(
+        name: 'jnlp', 
+        image: 'jenkins/inbound-agent', 
+        ttyEnabled: true
+        ),
+
       containerTemplate(
         name: 'docker', 
         image: 'docker:dind', 
         command: 'cat', 
         ttyEnabled: true, 
-        privileged: true),
-        args: '--storage-driver=vfs --host=tcp://0.0.0.0:2375'
+        privileged: true,
+        args: '--storage-driver=vfs --host=tcp://0.0.0.0:2375')
   ],
    volumes: [
     emptyDirVolume(mountPath: '/var/run', memory: false) 
-  ]) 
-  {
+  ]
+  ) {
     node(POD_LABEL) {
         stage('chackout') {
             container('jnlp') {
@@ -38,7 +43,7 @@ podTemplate(containers: [
                     sh '''
                         echo "$PASS" | docker login -u "$USER" --password-stdin
                         docker push $appimage:$apptag
-			docker push $appimage:latest
+                        docker push $appimage:latest
                     '''
                 }
         }
