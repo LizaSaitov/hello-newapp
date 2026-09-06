@@ -60,6 +60,9 @@ podTemplate(
                 }
             }
         } 
-    } 
-} // 
 
+        stage('Deploy'){
+           sh " echo helm template hello-newapp ./chart > hello-newapp.yaml"
+        }
+    } 
+} 
