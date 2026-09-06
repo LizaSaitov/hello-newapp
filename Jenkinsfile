@@ -1,5 +1,5 @@
 def appname = "hello-newapp"
-def repo = "LizaSaitov"  // Replace with your DockerHub username
+def repo = "lizaaliza"  // Replace with your DockerHub username
 def appimage = "${repo}/${appname}"
 def apptag = "${env.BUILD_NUMBER}"
 
@@ -13,7 +13,7 @@ podTemplate(containers: [
         privileged: true),
         args: '--storage-driver=vfs --host=tcp://0.0.0.0:2375'
   ])
-   volumes: [
+   (volumes: [
     emptyDirVolume(mountPath: '/var/run', memory: false) 
   ]) 
   {
@@ -38,6 +38,7 @@ podTemplate(containers: [
                     sh '''
                         echo "$PASS" | docker login -u "$USER" --password-stdin
                         docker push $appimage:$apptag
+			docker push $appimage:latest
                     '''
                 }
         }
