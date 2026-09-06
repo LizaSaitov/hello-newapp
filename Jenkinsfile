@@ -18,11 +18,12 @@ podTemplate(
             privileged: true,
             args: '--storage-driver=vfs --host=tcp://0.0.0.0:2375'
         ),
-	containerTemplate(
+        containerTemplate(
             name: 'helm',
             image: 'alpine/helm:latest',
             command: 'cat',
             ttyEnabled: true
+        ),
     ],
     volumes: [
         emptyDirVolume(mountPath: '/var/run', memory: false)
