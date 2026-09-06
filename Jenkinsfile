@@ -12,8 +12,8 @@ podTemplate(containers: [
         ttyEnabled: true, 
         privileged: true),
         args: '--storage-driver=vfs --host=tcp://0.0.0.0:2375'
-  ])
-   (volumes: [
+  ],
+   volumes: [
     emptyDirVolume(mountPath: '/var/run', memory: false) 
   ]) 
   {
